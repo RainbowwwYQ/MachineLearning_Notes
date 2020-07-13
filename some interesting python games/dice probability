@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jun 17 23:47:41 2020
+
+@author: mayhe
+"""
+
+def dics_greater(n, s):
+    
+    '''
+    n = how many times you throw the dice
+    s = which number you want the sum greater than
+    '''
+    
+    dic = {1: 1, 2: 1, 3: 1, 4: 1, 5:1, 6: 1}
+    k = 1
+    while k < n:
+        temp = {}
+        for i in range(1,7):
+            for item in dic.keys():
+                j = i + item
+                if j in temp.keys():
+                    temp[j] += dic[item]
+                else:
+                    temp.update({j:dic[item]})
+        dic = temp
+        k += 1
+    
+    count = 0
+    for i in dic.keys():
+        if i >=36:
+            count += dic[i]
+    
+    total = 0
+    for i in dic.values():
+        total += i
+        
+    p = count / total
+    p = str(p)[:4]+ '%'
+     
+    print(f'the probability of getting a sum >= {s} is {p}!')
+    
+dics_greater(10, 36)
